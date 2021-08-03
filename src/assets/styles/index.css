@@ -1,0 +1,21 @@
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing:antialiased;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+#app{
+    height: 100%;
+}
+
+a,a:focus,a:hover{
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
