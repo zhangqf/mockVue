@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { SAVE_TOKEN, GET_TOKEN, SAVE_NAME, GET_NAME } from './mutation-types'
+import { SAVE_TOKEN, GET_TOKEN, SAVE_NAME, GET_NAME ,SAVE_AVATAR,REMOVE_TOKEN} from './mutation-types'
 import { login } from "@/api/login";
 // import { Message } from 'element-ui';
 import ElementUI from 'element-ui';
@@ -15,7 +15,7 @@ const v = new Vue()
 
 const store = new Vuex.Store({
     state: {
-
+        count:12,
     },
     getters:{
         getToken:state => state.login.token
@@ -26,6 +26,7 @@ const store = new Vuex.Store({
             state: {
                 token: undefined,
                 name: undefined,
+                avatar:undefined
             },
             mutations: {
                 [SAVE_TOKEN](state, val) {
@@ -33,6 +34,12 @@ const store = new Vuex.Store({
                 },
                 [SAVE_NAME](state, val) {
                     state.name = val
+                },
+                [SAVE_AVATAR](state,val){
+                    state.avatar = val
+                },
+                [REMOVE_TOKEN](state){
+                    state.token = undefined
                 }
             },
             actions: {
@@ -48,6 +55,7 @@ const store = new Vuex.Store({
                         const {data:data} = ret
                         commit(SAVE_TOKEN,data.token)
                         commit(SAVE_NAME,data.nickname)
+                        commit(SAVE_AVATAR,data.avatar)
                     }
                     // try{
                     // console.log(userInfo)
@@ -67,6 +75,11 @@ const store = new Vuex.Store({
                     //     //     duration: 5 * 1000
                     //     //   })
                     // }
+                },
+                logout({commit}){
+                    
+                    commit(REMOVE_TOKEN)
+                    
                 }
             },
 

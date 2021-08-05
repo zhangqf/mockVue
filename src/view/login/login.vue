@@ -104,7 +104,7 @@ export default {
           //   });
             await this.$store.dispatch('login/login',this.ruleForm)
             console.log(this.$route)
-            this.$router.push({path:this.redirect||'/home'})
+            this.$router.push({path:this.redirect||'/'})
           // } else {
           //   this.$message({
           //     type: 'error',
