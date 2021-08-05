@@ -11,7 +11,7 @@
         <el-form-item prop="username">
           <el-input
             type="username"
-            v-model="ruleForm.username"
+            v-model.trim="ruleForm.username"
             autocomplete="off"
             placeholder="请输入账号"
           ></el-input>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { login } from "@/api/login";
+
 export default {
   name: "Login",
   data() {
@@ -50,6 +50,7 @@ export default {
       i: Math.ceil(Math.random() * 20),
       timerId: undefined,
       bg: undefined,
+      redirect:undefined,
       ruleForm: {
         username: undefined,
         password: undefined,
@@ -70,6 +71,13 @@ export default {
       };
     },
   },
+  watch:{
+    $route:{
+      handler:function(route) {
+        this.redirect = route.query && route.query.redirect
+      }
+    }
+  },
   created() {
     this.getList();
   },
@@ -87,19 +95,22 @@ export default {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           // alert("submit!");
-          const { data } = await login(this.ruleForm);
-          console.log(data);
-          if (data.code == 200) {
-             this.$message({
-              type: 'success',
-              message: `登录成功`
-            });
-          } else {
-            this.$message({
-              type: 'error',
-              message: `${data.message}`
-            });
-          }
+          // const { data } = await login(this.ruleForm);
+          // console.log(data);
+          // if (data.code == 200) {
+          //    this.$message({
+          //     type: 'success',
+          //     message: `登录成功`
+          //   });
+            await this.$store.dispatch('login/login',this.ruleForm)
+            console.log(this.$route)
+            this.$router.push({path:this.redirect||'/home'})
+          // } else {
+          //   this.$message({
+          //     type: 'error',
+          //     message: `${data.message}`
+          //   });
+          // }
         } else {
           console.log("error submit!!");
           return false;

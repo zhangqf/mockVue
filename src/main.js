@@ -8,6 +8,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '../mock/mock'
 import 'normalize.css/normalize.css'
 import './assets/styles/index.css'
+import store from './store/index'
+
+
 
 Vue.config.productionTip = false
 
@@ -17,6 +20,7 @@ Vue.use(ElementUI);
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
