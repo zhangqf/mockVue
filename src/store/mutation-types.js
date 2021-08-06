@@ -4,4 +4,5 @@ export const SAVE_NAME = 'SAVE_NAME'
 export const GET_NAME = 'GET_NAME'
 export const SAVE_AVATAR = 'SAVE_AVATAR'
 export const REMOVE_TOKEN = 'REMOVE_TOKEN'
-
+export const USER_INFO = 'USER_INFO'
+export const SAVE_ROLE = 'SAVE_ROLE'

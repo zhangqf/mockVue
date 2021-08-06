@@ -9,7 +9,7 @@ import '../mock/mock'
 import 'normalize.css/normalize.css'
 import './assets/styles/index.css'
 import store from './store/index'
-
+import './permission'
 
 
 Vue.config.productionTip = false

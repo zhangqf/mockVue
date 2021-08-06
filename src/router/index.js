@@ -2,9 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/view/login/login'
-import { hasToken } from '../utils/login'
+
 
 import Layout from "@/layout/index"
+
 
 Vue.use(Router)
 
@@ -27,17 +28,17 @@ const router = new Router({
    
         },
         {
-          meta:{title:'dash'},
+          meta:{title:'表格'},
           path:'/dash',
           name:"dash",
-          component: (resolve) => require(['@/components/HelloWorld'],resolve)
+          component: (resolve) => require(['@/view/form/myform'],resolve)
    
         },
         {
-          meta:{title:'首页1'},
+          meta:{title:'表单'},
           path:'/nav',
           name:"nav",
-          component: (resolve) => require(['@/components/HelloWorld1'],resolve)
+          component: (resolve) => require(['@/view/table/mytable'],resolve)
    
         },
         {
@@ -50,7 +51,19 @@ const router = new Router({
             path:"a",
             meta:{title:'a'},
             name:"a",
+            redirect:"/page/a/abc",
             component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+            children:[{
+              path:"abc",
+              meta:{title:'abc'},
+              name:"abc",
+              component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+            },{
+              path:"dbc",
+              meta:{title:'dbc'},
+              name:"dbc",
+              component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+            }]
           },{
             path:'b',
             meta:{title:'b'},
@@ -92,29 +105,5 @@ const router = new Router({
   ]
 })
 
-router.beforeEach((to,from,next) => {
- console.log("///",hasToken())
-  if(hasToken()){
-    if(to.path === '/login'){
-      next({path:'/'})
-    }else{
-      // 根据用户信息获取响应的数据
-      // 获取用户信息
-      next()
-      // 更加用户确定数据
-    }
-  }else{
-    console.log('>',hasToken())
-    if(to.path==='/login'){
-      next()
-    }else{
-      next(`/login?redirect=${to.fullPath}`)
-    }
-    
-  }
- 
-  console.log(to)
-  console.log(from)
-  console.log(next())
-})
+
 export default router

@@ -15,5 +15,22 @@ export function login(query){
     })
 }
 
+export function getRouterByRole(query){
+    return request({
+        url:'/api/useInfo',
+        method:"get",
+        data:query
+    })
+}
+
+export function getTableList(){
+    return request({
+        url:'/api/tableList',
+        method:"get",
+    })
+}
+
+
+
 
 

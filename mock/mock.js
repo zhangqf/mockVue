@@ -39,3 +39,168 @@ Mock.mock(`/api/login`, 'post', (option) => {
     }
 
 })
+
+Mock.mock(`/api/useInfo`,'get',(option)=>{
+    console.log(option)
+    const req = JSON.parse(option.body)
+    console.log(req)
+    if(req.role==='admin'){
+        return{
+            code:200,
+            data:[
+                {
+                  // meta:{title:'dash'},
+                  path:'/index',
+                  name:"index",
+                  component: (resolve) => require(['@/components/HelloWorld'],resolve)
+           
+                },
+                {
+                  meta:{title:'dash'},
+                  path:'/dash',
+                  name:"dash",
+                  component: (resolve) => require(['@/components/HelloWorld'],resolve)
+           
+                },
+                {
+                  meta:{title:'首页1'},
+                  path:'/nav',
+                  name:"nav",
+                  component: (resolve) => require(['@/components/HelloWorld1'],resolve)
+           
+                },
+                {
+                  meta:{title:'group'},
+                  path:'/page',
+                  name:"page",
+                  redirect:'/page/a',
+                  component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+                  children:[{
+                    path:"a",
+                    meta:{title:'a'},
+                    name:"a",
+                    redirect:"/page/a/abc",
+                    component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+                    children:[{
+                      path:"abc",
+                      meta:{title:'abc'},
+                      name:"abc",
+                      component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+                    },{
+                      path:"dbc",
+                      meta:{title:'dbc'},
+                      name:"dbc",
+                      component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+                    }]
+                  },{
+                    path:'b',
+                    meta:{title:'b'},
+                    name:"b",
+                    component: (resolve) => require(['@/components/HelloWorld1'],resolve)
+        
+                  }
+                ]
+           
+                },
+                {
+                  meta:{title:'首页3'},
+                  path:'/home3',
+                  name:"home3",
+                  component: (resolve) => require(['@/components/HelloWorld1'],resolve)
+           
+                },
+                {
+                  meta:{title:'test'},
+                  path:'/home3/test',
+                  name:"test",
+                  component: (resolve) => require(['@/components/HelloWorld1'],resolve)
+                       
+                }
+              ]
+        }
+    }else{
+        return{
+            code:200,
+            data:[
+                {
+                  // meta:{title:'dash'},
+                  path:'/index',
+                  name:"index",
+                  component: (resolve) => require(['@/components/HelloWorld'],resolve)
+           
+                },
+                {
+                  meta:{title:'dash'},
+                  path:'/dash',
+                  name:"dash",
+                  component: (resolve) => require(['@/components/HelloWorld'],resolve)
+           
+                },
+                {
+                  meta:{title:'首页1'},
+                  path:'/nav',
+                  name:"nav",
+                  component: (resolve) => require(['@/components/HelloWorld1'],resolve)
+           
+                },
+                {
+                  meta:{title:'group'},
+                  path:'/page',
+                  name:"page",
+                  redirect:'/page/a',
+                  component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+                  children:[{
+                    path:"a",
+                    meta:{title:'a'},
+                    name:"a",
+                    redirect:"/page/a/abc",
+                    component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+                    children:[{
+                      path:"abc",
+                      meta:{title:'abc'},
+                      name:"abc",
+                      component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+                    },{
+                      path:"dbc",
+                      meta:{title:'dbc'},
+                      name:"dbc",
+                      component: (resolve) => require(['@/components/HelloWorld1'],resolve),
+                    }]
+                  }
+                ]
+                },
+              ]
+        }
+    }
+})
+
+
+Mock.mock(`/api/router`,'get',(option)=>{
+    console.log("role",req)
+})
+
+Mock.mock(`/api/tableList`,'get',(option)=>{
+  return Mock.mock({
+    code:200,
+    "data|10":[{
+      date:"@date",
+      "name":"@cname",
+      "address|1":[
+        "兰州",
+        "天水",
+        "陇南",
+        "平凉",
+        "庆阳",
+        "定西",
+        "白银",
+        "张掖",
+        "武威","金昌",
+        "酒泉",
+        "嘉峪关",
+        "敦煌",
+        "临夏回族自治州",
+        "甘南藏族自治州",
+      ]
+    }]
+  })
+})
